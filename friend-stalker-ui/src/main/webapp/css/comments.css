@@ -1,0 +1,41 @@
+.comments div .author {
+	float: left;
+	color: #DE4927;
+	margin-bottom: 20px;
+	margin-top: 5px;
+	margin-right: 10px;
+	text-align: right;
+}
+
+.comments div .post {
+	float: left;
+	width: 350px;
+	background-color: #e6e6e2;
+	margin-bottom: 1px;
+	min-height: 50px;
+	padding: 15px 20px;
+}
+
+.comments div .author span {
+	display: block;
+	color: #acac9e;
+}
+
+.comment {
+	word-wrap:break-word;
+	font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Georgia", serif;
+	margin-bottom: 10px;
+	clear: both;
+	float: left;
+	display: block;
+	position: relative;
+}
+
+.defaul_size_comment_textare {
+	width: 335px;
+	max-width: 335px;
+	min-width: 335px;
+	height: 120px;
+	min-height: 120px;
+	max-height: 120px;
+}
