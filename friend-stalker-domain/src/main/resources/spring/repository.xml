@@ -26,4 +26,10 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" />
 
+    <bean id="liquibase"
+          class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource" />
+        <property name="changeLog" value="classpath:database/changelog.xml" />
+    </bean>
+
 </beans>
