@@ -10,6 +10,5 @@
     <import resource="classpath:spring/datasource.xml"/>
     <import resource="classpath:spring/jpa-mapping.xml"/>
     <import resource="classpath:spring/wicket.xml"/>
-
 </beans>
 

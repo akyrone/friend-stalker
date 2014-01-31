@@ -17,6 +17,8 @@ public class Application extends WebApplication {
     protected void init() {
         super.init();
         
+        mountPage("/login", LoginPage.class);
+        
         getRequestCycleSettings().setResponseRequestEncoding("UTF-8");
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
         getComponentInstantiationListeners().add(
