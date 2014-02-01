@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itomkinas.friendStalker.domain.dao.UserDao;
-import com.itomkinas.friendStalker.domain.entity.User;
+import com.itomkinas.friendStalker.domain.entity.UserEntity;
 
 @Service
 public class UserService {
@@ -16,13 +16,17 @@ public class UserService {
     private UserDao userDao;
     
     @Transactional(readOnly = true)
-    public List<User> listAll() {
+    public List<UserEntity> listAll() {
         return userDao.listAll();
     }
     
     @Transactional
-    public User loadByUid(Long id) {
-        return userDao.loadByUid(id);
+    public UserEntity loadByUid(String uid) {
+        return userDao.loadByUid(uid);
     }
-	
+    
+    @Transactional
+    public void merge(UserEntity user) {
+    	userDao.merge(user);
+    }
 }

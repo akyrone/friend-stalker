@@ -2,10 +2,12 @@ package com.itomkinas.friendStalker.domain.dao;
 
 import java.util.List;
 
-import com.itomkinas.friendStalker.domain.entity.User;
+import com.itomkinas.friendStalker.domain.entity.UserEntity;
 
 public interface UserDao {
-	User loadByUid(Long id);
+	UserEntity loadByUid(String id);
 	
-	List<User> listAll();
+	List<UserEntity> listAll();
+
+	void merge(UserEntity user);
 }

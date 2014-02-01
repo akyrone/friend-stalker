@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.itomkinas.friendStalker.domain.dao.UserDao;
-import com.itomkinas.friendStalker.domain.entity.User;
+import com.itomkinas.friendStalker.domain.entity.UserEntity;
 
 @Repository
 public class UserDaoJpa implements UserDao {
@@ -17,13 +17,18 @@ public class UserDaoJpa implements UserDao {
     private EntityManager em;
 	
     @Override
-    public User loadByUid(Long userUid) {
-        return em.find(User.class, userUid);
+    public UserEntity loadByUid(String userUid) {
+        return em.find(UserEntity.class, userUid);
+    }
+    
+    @Override
+    public void merge(UserEntity user) {
+    	em.merge(user);
     }
 
     @Override
-    public List<User> listAll() {
-        return em.createQuery("Select c FROM User c", User.class)
+    public List<UserEntity> listAll() {
+        return em.createQuery("Select c FROM User c", UserEntity.class)
                 .getResultList();
     }
 }

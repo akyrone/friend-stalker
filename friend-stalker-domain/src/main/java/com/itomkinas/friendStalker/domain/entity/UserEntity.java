@@ -10,37 +10,38 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Users")
-public class User implements Comparable<Object> {
+public class UserEntity implements Comparable<Object> {
+	
 	@Id
-	@GeneratedValue
-	private Long userId;
+    @GeneratedValue
+    private Long userId;
 	
 	@Column(name="full_name")
 	private String fullName;
 	
-	private String uid;
 	private String tokken;
+	
+	private String uid;
 	
 	@Column(name="valid_till")
 	private Date validTill;
 	
-	public User() {
+	public UserEntity() {
 	}
 
-	public User(String fullName, String uid, String tokken, Date validTill) {
-		super();
-		this.fullName = fullName;
+	public UserEntity(String uid, String fullName, String tokken, Date validTill) {
 		this.uid = uid;
+		this.fullName = fullName;
 		this.tokken = tokken;
 		this.validTill = validTill;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public String getUserId() {
+		return uid;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUserId(String userId) {
+		this.uid = userId;
 	}
 
 	public String getFullName() {
@@ -77,7 +78,7 @@ public class User implements Comparable<Object> {
 
 	@Override
 	public int compareTo(Object o) {
-		 User u = (User) o;
+		 UserEntity u = (UserEntity) o;
 	        if (u.getUid() != this.getUid()) {
 	            return 1;
 	        } else {

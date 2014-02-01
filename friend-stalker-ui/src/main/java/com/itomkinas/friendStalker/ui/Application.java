@@ -1,16 +1,27 @@
 package com.itomkinas.friendStalker.ui;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.Response;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.stereotype.Component;
+
+import com.itomkinas.friendStalker.ui.user.LoginPage;
+import com.itomkinas.friendStalker.ui.utils.FriendStalkerSession;
 
 @Component("wicketApplication")
 public class Application extends WebApplication {
 
     @Override
     public Class<? extends Page> getHomePage() {
-        return BasePage.class;
+        return HomePage.class;
+    }
+
+    @Override
+    public final Session newSession(Request request, Response response) {
+        return new FriendStalkerSession(request);
     }
 
     @Override
