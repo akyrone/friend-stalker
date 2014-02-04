@@ -12,6 +12,7 @@ import com.itomkinas.friendStalker.domain.service.UserService;
 import com.itomkinas.friendStalker.ui.HomePage;
 import com.itomkinas.friendStalker.ui.utils.FacebookOAuth;
 import com.itomkinas.friendStalker.ui.utils.FriendStalkerSession;
+import com.restfb.FacebookClient.AccessToken;
 
 public class LoginPage extends WebPage {
 
@@ -19,7 +20,7 @@ public class LoginPage extends WebPage {
 
 	@SpringBean
 	UserService userService;
-	
+
 	protected void onInitialize() {
 		super.onInitialize();
 		
@@ -31,8 +32,8 @@ public class LoginPage extends WebPage {
 		add(initFbLoginLink("login"));
 		loginWithFacebook();
 	}
-
-	private UserEntity getFacebookUser() {
+	
+	private AccessToken getFacebookToken() {
 		StringValue code = RequestCycle.get().getRequest()
 				.getRequestParameters().getParameterValue("code");
 		if (!code.isEmpty()) {
@@ -40,12 +41,12 @@ public class LoginPage extends WebPage {
 		}
 		return null;
 	}
-	
+
 	private void loginWithFacebook() {
-		UserEntity user = getFacebookUser();
-		if (user != null) {
-			userService.merge(user);
-			FriendStalkerSession.get().setUser(user);
+		AccessToken token = getFacebookToken();
+		if (token != null) {
+			UserEntity loggedUser = userService.login(token);
+			FriendStalkerSession.get().setUser(loggedUser);
 			setResponsePage(HomePage.class);
 		}
 	}
@@ -56,8 +57,7 @@ public class LoginPage extends WebPage {
 
 			@Override
 			public void onClick() {
-				throw new RedirectToUrlException(
-						FacebookOAuth.getRedirectURL());
+				throw new RedirectToUrlException(FacebookOAuth.getRedirectURL());
 			}
 		};
 	}

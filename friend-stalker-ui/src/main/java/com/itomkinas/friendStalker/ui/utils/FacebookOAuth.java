@@ -37,24 +37,14 @@ public final class FacebookOAuth {
 		return FACEBOOK_FACTORY.getOAuthAccessToken(code, CALLBACK_URL);
 	}
 
-	public static UserEntity getUser(StringValue code) {
+	public static AccessToken getUser(StringValue code) {
 		try {
 			OAuthAccessToken token = getOAuthAccessToken(code);
 
 			AccessToken longTermToken = new DefaultFacebookClient()
 					.obtainExtendedAccessToken(APP_ID, APP_SECRET,
 							token.getAccessToken());
-
-			FacebookClient facebookClient = new DefaultFacebookClient(
-					longTermToken.getAccessToken());
-
-			User facebookUser = facebookClient.fetchObject("me", User.class);
-
-			UserEntity user = new UserEntity(facebookUser.getId(),
-					facebookUser.getName(), longTermToken.getAccessToken(),
-					longTermToken.getExpires());
-			
-			return user;
+			return longTermToken;
 		} catch (FacebookException e) {
 			return null;
 		}

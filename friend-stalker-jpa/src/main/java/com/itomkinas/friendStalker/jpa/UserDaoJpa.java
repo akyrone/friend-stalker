@@ -3,7 +3,9 @@ package com.itomkinas.friendStalker.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -17,13 +19,22 @@ public class UserDaoJpa implements UserDao {
     private EntityManager em;
 	
     @Override
-    public UserEntity loadByUid(String userUid) {
-        return em.find(UserEntity.class, userUid);
+    public UserEntity loadByUid(String facebookUid) {
+    	TypedQuery<UserEntity> query = em.createQuery(
+    			"SELECT u FROM UserEntity u WHERE u.uid = :uid",
+    				UserEntity.class);
+    	query.setParameter("uid", facebookUid);
+    	
+    	 try {
+             return query.getSingleResult();
+         } catch (NoResultException e) {
+             return null;
+         }
     }
     
     @Override
-    public void merge(UserEntity user) {
-    	em.merge(user);
+    public UserEntity merge(UserEntity user) {
+    	return em.merge(user);
     }
 
     @Override

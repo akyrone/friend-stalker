@@ -9,5 +9,6 @@ public interface UserDao {
 	
 	List<UserEntity> listAll();
 
-	void merge(UserEntity user);
+	UserEntity merge(UserEntity user);
+	
 }
