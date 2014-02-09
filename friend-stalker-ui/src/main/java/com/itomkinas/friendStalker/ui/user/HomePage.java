@@ -13,6 +13,7 @@ import com.itomkinas.friendStalker.domain.entity.UserEntity;
 import com.itomkinas.friendStalker.domain.service.UserService;
 import com.itomkinas.friendStalker.ui.template.BasePage;
 import com.itomkinas.friendStalker.ui.utils.FriendStalkerSession;
+import com.itomkinas.friendStalker.ui.utils.StaticImage;
 
 public class HomePage extends BasePage {
 
@@ -46,11 +47,17 @@ public class HomePage extends BasePage {
 		    protected void populateItem(ListItem item) {
 		        UserEntity user = (UserEntity) item.getModelObject();
 		        
-		        item.add(new Label("id", item.getId()));
+		        item.add(new Label("id", (parseLong(item.getId()) + 1) + "" ));
+		        //?height=200&type=normal&width=200
+		        item.add(new StaticImage("image", new Model<String>("http://graph.facebook.com/"+ user.getUid()  +"/picture")));
 		        item.add(new Label("name", user.getFullName()));
 		    }
 		};
 		
 		return friendListListView;
+	}
+	
+	public Long parseLong(String number) {
+		return Long.parseLong(number);
 	}
 }
