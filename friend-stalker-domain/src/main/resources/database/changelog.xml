@@ -3,17 +3,42 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
-
 	<changeSet author="tomas" id="1">
 		<createTable tableName="Users">
-			<column name="userId" autoIncrement="true" type="BIGINT(20)">
+			<column name="userId" autoIncrement="true" type="BIGINT(15)">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="full_name" type="VARCHAR(30)"></column>
-			<column name="uid" type="VARCHAR(20)"></column>
-			<column name="tokken" type="VARCHAR(20)"></column>
-			<column name="valid_till" type="TIMESTAMP"></column>
+			<column name="uid" type="VARCHAR(60)"></column>
+			<column name="tokken" type="VARCHAR(255)"></column>
+			<column name="token_valid_till" type="TIMESTAMP"
+				defaultValueDate="null">
+				<constraints nullable="true" />
+			</column>
 		</createTable>
+		<createTable tableName="Connections">
+			<column name="id" autoIncrement="true" type="BIGINT(20)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="uid1" type="BIGINT(15)">
+				<constraints nullable="false" />
+			</column>
+			<column name="uid2" type="BIGINT(15)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet author="tomas" id="2">
+		<addForeignKeyConstraint baseColumnNames="uid1"
+			baseTableName="Connections" constraintName="uid1Constraint"
+			referencedColumnNames="userId" referencedTableName="Users" />
+	</changeSet>
+
+	<changeSet author="Tomas" id="3">
+		<addForeignKeyConstraint baseColumnNames="uid2"
+			baseTableName="Connections" constraintName="uid2Constraint"
+			referencedColumnNames="userId" referencedTableName="Users" />
 	</changeSet>
 </databaseChangeLog>
                                        

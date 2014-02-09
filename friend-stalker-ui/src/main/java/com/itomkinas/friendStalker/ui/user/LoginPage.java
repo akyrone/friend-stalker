@@ -9,7 +9,6 @@ import org.apache.wicket.util.string.StringValue;
 
 import com.itomkinas.friendStalker.domain.entity.UserEntity;
 import com.itomkinas.friendStalker.domain.service.UserService;
-import com.itomkinas.friendStalker.ui.HomePage;
 import com.itomkinas.friendStalker.ui.utils.FacebookOAuth;
 import com.itomkinas.friendStalker.ui.utils.FriendStalkerSession;
 import com.restfb.FacebookClient.AccessToken;
@@ -47,6 +46,7 @@ public class LoginPage extends WebPage {
 		if (token != null) {
 			UserEntity loggedUser = userService.login(token);
 			FriendStalkerSession.get().setUser(loggedUser);
+			userService.saveFriends(loggedUser);
 			setResponsePage(HomePage.class);
 		}
 	}

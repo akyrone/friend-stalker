@@ -1,39 +1,52 @@
 package com.itomkinas.friendStalker.domain.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Users")
 public class UserEntity implements Comparable<Object> {
-	
+
 	@Id
-    @GeneratedValue
-    private Long userId;
-	
-	@Column(name="full_name")
+	@GeneratedValue
+	private Long userId;
+
+	@Column(name = "full_name")
 	private String fullName;
-	
+
 	private String tokken;
-	
+
 	private String uid;
+
+	@Column(name = "token_valid_till")
+	private Date tokenValidTill;
 	
-	@Column(name="valid_till")
-	private Date validTill;
-	
+	@ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name="Connections", 
+                joinColumns={@JoinColumn(name="uid1")}, 
+                inverseJoinColumns={@JoinColumn(name="uid2")})
+	private Set<UserEntity> friends = new HashSet<UserEntity>();
+
 	public UserEntity() {
 	}
 
-	public UserEntity(String uid, String fullName, String tokken, Date validTill) {
+	public UserEntity(String uid, String fullName, String tokken,
+			Date tokenValidTill) {
 		this.uid = uid;
 		this.fullName = fullName;
 		this.tokken = tokken;
-		this.validTill = validTill;
+		this.tokenValidTill = tokenValidTill;
 	}
 
 	public String getUserId() {
@@ -68,21 +81,25 @@ public class UserEntity implements Comparable<Object> {
 		this.tokken = tokken;
 	}
 
-	public Date getValidTill() {
-		return validTill;
+	public Date getTokenValidTill() {
+		return tokenValidTill;
 	}
 
-	public void setValidTill(Date validTill) {
-		this.validTill = validTill;
+	public void setTokenValidTill(Date tokenValidTill) {
+		this.tokenValidTill = tokenValidTill;
+	}
+	
+	public Set<UserEntity> getFriends() {
+		return friends;
 	}
 
 	@Override
 	public int compareTo(Object o) {
-		 UserEntity u = (UserEntity) o;
-	        if (u.getUid() != this.getUid()) {
-	            return 1;
-	        } else {
-	            return 0;
-	        }
+		UserEntity u = (UserEntity) o;
+		if (u.getUid() != this.getUid()) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 }

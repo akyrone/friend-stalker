@@ -1,0 +1,22 @@
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+	<body class="container" xmlns:wicket="http://wicket.apache.org">
+		<h1>
+			Hello, <span wicket:id="name"></span>. <a href="#" wicket:id="logout">Logout</a>
+		</h1>
+		<div class="row">
+			<div class="col-md-4">
+				<table class="table table-condensed">
+					<tr>
+						<td>ID</td>
+						<td>Name</td>
+					</tr>
+					<tr wicket:id="friendList">
+						<td wicket:id="id"></td>
+						<td wicket:id="name"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-8"></div>
+		</div>
+	</body>
+</wicket:extend>

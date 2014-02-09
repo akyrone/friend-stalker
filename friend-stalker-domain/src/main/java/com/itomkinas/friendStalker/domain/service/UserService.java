@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itomkinas.friendStalker.domain.dao.UserDao;
 import com.itomkinas.friendStalker.domain.entity.UserEntity;
+import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.FacebookClient.AccessToken;
@@ -53,10 +54,31 @@ public class UserService {
 					token.getAccessToken(), token.getExpires()));
 		} else {
 			user.setTokken(token.getAccessToken());
-			user.setValidTill(token.getExpires());
+			user.setTokenValidTill(token.getExpires());
 			user = merge(user);
 		}
-
+		
 		return user;
+	}
+	
+	@Transactional
+	public void saveFriends(UserEntity currentUser) {
+		FacebookClient facebookClient = new DefaultFacebookClient(currentUser.getTokken());
+		Connection<User> myFriends = facebookClient.fetchConnection("me/friends", User.class);
+		List<User> friends = myFriends.getData();
+		
+		for (int i = 0; i < friends.size(); i++) {
+			User fbUser = friends.get(i);
+			UserEntity friend = loadByUid(fbUser.getId());
+			if (friend == null) {
+				friend = new UserEntity();
+				friend.setFullName(fbUser.getName());
+				friend.setUid(fbUser.getId());
+				currentUser.getFriends().add(friend);
+			} else {
+				currentUser.getFriends().add(friend);
+			}
+		}
+		merge(currentUser);
 	}
 }

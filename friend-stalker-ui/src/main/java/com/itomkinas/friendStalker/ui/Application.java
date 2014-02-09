@@ -8,6 +8,7 @@ import org.apache.wicket.request.Response;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.stereotype.Component;
 
+import com.itomkinas.friendStalker.ui.user.HomePage;
 import com.itomkinas.friendStalker.ui.user.LoginPage;
 import com.itomkinas.friendStalker.ui.utils.FriendStalkerSession;
 
