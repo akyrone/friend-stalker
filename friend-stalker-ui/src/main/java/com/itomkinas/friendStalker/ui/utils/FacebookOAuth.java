@@ -8,11 +8,8 @@ import com.face4j.facebook.enums.Display;
 import com.face4j.facebook.enums.Permission;
 import com.face4j.facebook.exception.FacebookException;
 import com.face4j.facebook.factory.FacebookFactory;
-import com.itomkinas.friendStalker.domain.entity.UserEntity;
 import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
 import com.restfb.FacebookClient.AccessToken;
-import com.restfb.types.User;
 
 public final class FacebookOAuth {
 	private static final String APP_ID = "478714635571704";

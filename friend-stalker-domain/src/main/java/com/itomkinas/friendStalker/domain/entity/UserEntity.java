@@ -37,6 +37,12 @@ public class UserEntity implements Comparable<Object> {
                 joinColumns={@JoinColumn(name="uid1")}, 
                 inverseJoinColumns={@JoinColumn(name="uid2")})
 	private Set<UserEntity> friends = new HashSet<UserEntity>();
+	
+	@ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name="Stalkings", 
+                joinColumns={@JoinColumn(name="stalker_id")}, 
+                inverseJoinColumns={@JoinColumn(name="victim_id")})
+	private Set<UserEntity> victims = new HashSet<UserEntity>();
 
 	public UserEntity() {
 	}
@@ -47,6 +53,14 @@ public class UserEntity implements Comparable<Object> {
 		this.fullName = fullName;
 		this.tokken = tokken;
 		this.tokenValidTill = tokenValidTill;
+	}
+
+	public Set<UserEntity> getVictims() {
+		return victims;
+	}
+
+	public void setVictims(Set<UserEntity> victims) {
+		this.victims = victims;
 	}
 
 	public String getUserId() {

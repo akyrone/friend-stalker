@@ -40,5 +40,19 @@
 			baseTableName="Connections" constraintName="uid2Constraint"
 			referencedColumnNames="userId" referencedTableName="Users" />
 	</changeSet>
+
+	<changeSet author="Tomas" id="4">
+		<createTable tableName="Stalkings">
+			<column name="id" autoIncrement="true" type="BIGINT(20)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="stalker_id" type="BIGINT(15)">
+				<constraints nullable="false" />
+			</column>
+			<column name="victim_id" type="BIGINT(15)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
 </databaseChangeLog>
                                        
