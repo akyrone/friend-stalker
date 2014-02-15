@@ -1,7 +1,5 @@
 package com.itomkinas.friendStalker.domain.service.Tasks;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -15,9 +13,9 @@ public class OnlinePresenceCron {
 	@Autowired
 	UserService userService;
 	
-    @Scheduled(cron="* * * * * *")
+    @Scheduled(fixedRate=5000)
     @Transactional
     public void process() {
-    	//System.out.println("Dummy cron " + new Date());
+    	//System.out.println("testing");
     }
 }

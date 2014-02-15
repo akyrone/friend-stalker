@@ -54,5 +54,28 @@
 			</column>
 		</createTable>
 	</changeSet>
+	
+	<changeSet author="Tomas" id="5">
+		<createTable tableName="Online_presence">
+			<column name="id" autoIncrement="true" type="BIGINT(20)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="user_id" type="BIGINT(15)">
+				<constraints nullable="false" />
+			</column>
+			<column name="online_status" type="VARCHAR(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="time" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	
+	<changeSet author="Tomas" id="6">
+		<addForeignKeyConstraint baseColumnNames="user_id"
+			baseTableName="Online_presence" constraintName="user_id_constraint"
+			referencedColumnNames="userId" referencedTableName="Users" />
+	</changeSet>
 </databaseChangeLog>
                                        

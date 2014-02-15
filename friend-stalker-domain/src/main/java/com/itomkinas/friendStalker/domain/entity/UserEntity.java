@@ -1,17 +1,19 @@
 package com.itomkinas.friendStalker.domain.entity;
 
 import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,14 +38,17 @@ public class UserEntity implements Comparable<Object> {
     @JoinTable(name="Connections", 
                 joinColumns={@JoinColumn(name="uid1")}, 
                 inverseJoinColumns={@JoinColumn(name="uid2")})
-	private Set<UserEntity> friends = new HashSet<UserEntity>();
+	private Set<UserEntity> friends;
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name="Stalkings", 
                 joinColumns={@JoinColumn(name="stalker_id")}, 
                 inverseJoinColumns={@JoinColumn(name="victim_id")})
-	private Set<UserEntity> victims = new HashSet<UserEntity>();
-
+	private Set<UserEntity> victims;
+	
+	@OneToMany(targetEntity = OnlinePresence.class, mappedBy = "user", fetch = FetchType.LAZY)
+	private List<OnlinePresence> onlinePresence;
+	
 	public UserEntity() {
 	}
 
@@ -53,6 +58,14 @@ public class UserEntity implements Comparable<Object> {
 		this.fullName = fullName;
 		this.tokken = tokken;
 		this.tokenValidTill = tokenValidTill;
+	}
+	
+	public List<OnlinePresence> getOnlinePresence() {
+		return onlinePresence;
+	}
+
+	public void setOnlinePresence(List<OnlinePresence> onlinePresence) {
+		this.onlinePresence = onlinePresence;
 	}
 
 	public Set<UserEntity> getVictims() {
