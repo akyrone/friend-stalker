@@ -42,4 +42,10 @@ public class UserDaoJpa implements UserDao {
         return em.createQuery("Select c FROM UserEntity c", UserEntity.class)
                 .getResultList();
     }
+
+	@Override
+	public List<UserEntity> listAllActiveUsers() {
+		return em.createQuery("Select c FROM UserEntity c WHERE c.tokken is not null", UserEntity.class)
+				.getResultList();
+	}
 }

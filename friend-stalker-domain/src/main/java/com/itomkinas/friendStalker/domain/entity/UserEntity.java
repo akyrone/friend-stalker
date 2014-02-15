@@ -44,7 +44,7 @@ public class UserEntity implements Comparable<Object> {
     @JoinTable(name="Stalkings", 
                 joinColumns={@JoinColumn(name="stalker_id")}, 
                 inverseJoinColumns={@JoinColumn(name="victim_id")})
-	private Set<UserEntity> victims;
+	private List<UserEntity> victims;
 	
 	@OneToMany(targetEntity = OnlinePresence.class, mappedBy = "user", fetch = FetchType.LAZY)
 	private List<OnlinePresence> onlinePresence;
@@ -68,11 +68,11 @@ public class UserEntity implements Comparable<Object> {
 		this.onlinePresence = onlinePresence;
 	}
 
-	public Set<UserEntity> getVictims() {
+	public List<UserEntity> getVictims() {
 		return victims;
 	}
 
-	public void setVictims(Set<UserEntity> victims) {
+	public void setVictims(List<UserEntity> victims) {
 		this.victims = victims;
 	}
 

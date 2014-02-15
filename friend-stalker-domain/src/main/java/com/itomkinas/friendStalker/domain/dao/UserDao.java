@@ -8,6 +8,8 @@ public interface UserDao {
 	UserEntity loadByUid(String id);
 	
 	List<UserEntity> listAll();
+	
+	List<UserEntity> listAllActiveUsers();
 
 	UserEntity merge(UserEntity user);
 	

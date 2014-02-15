@@ -29,6 +29,11 @@ public class UserService {
 	public UserEntity loadByUid(String uid) {
 		return userDao.loadByUid(uid);
 	}
+	
+	@Transactional
+	public List<UserEntity> loadAllActiveUsers() {
+		return userDao.listAllActiveUsers();
+	}
 
 	@Transactional
 	public UserEntity merge(UserEntity user) {
