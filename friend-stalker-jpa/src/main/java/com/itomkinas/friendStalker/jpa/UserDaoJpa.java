@@ -39,7 +39,7 @@ public class UserDaoJpa implements UserDao {
 
     @Override
     public List<UserEntity> listAll() {
-        return em.createQuery("Select c FROM User c", UserEntity.class)
+        return em.createQuery("Select c FROM UserEntity c", UserEntity.class)
                 .getResultList();
     }
 }

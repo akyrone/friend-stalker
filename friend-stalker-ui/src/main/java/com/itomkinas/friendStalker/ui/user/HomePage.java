@@ -30,7 +30,6 @@ public class HomePage extends BasePage {
 	protected void onInitialize() {
 		super.onInitialize();
 		
-		loggedInUser = userService.loadByUid(FriendStalkerSession.get().getUser().getUid());
 		
 		add(initLabel("name", FriendStalkerSession.get().getUser().getFullName()));
 		add(initFriendList(FriendStalkerSession.get().getUser()));
@@ -43,6 +42,7 @@ public class HomePage extends BasePage {
 	@SuppressWarnings("rawtypes")
 	public ListView initFriendList(UserEntity userEntity) {
 
+		loggedInUser = userService.loadByUid(FriendStalkerSession.get().getUser().getUid());
 		List<UserEntity> friendList = new ArrayList<UserEntity>(loggedInUser.getFriends());
 		
 		@SuppressWarnings("unchecked")
