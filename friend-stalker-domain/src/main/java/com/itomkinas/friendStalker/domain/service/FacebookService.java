@@ -37,6 +37,10 @@ public class FacebookService {
 		FacebookClient facebookClient = new DefaultFacebookClient(currentUser.getTokken());
 		String query = buildFqlQuery(friendList);
 		
+		if (query == null) {
+			return;
+		}
+		
 		List<FqlUser> fqlUserList = facebookClient.executeFqlQuery(query, FqlUser.class);
 		
 		for (FqlUser fqlUser : fqlUserList) {
