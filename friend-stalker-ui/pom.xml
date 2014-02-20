@@ -119,35 +119,35 @@
 			<artifactId>face4j</artifactId>
 			<version>1.5.11</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/facebook/face4j-1.5.11.jar</systemPath>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/face4j-1.5.11.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.5.11</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/facebook/commons-codec-1.3.jar</systemPath>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/commons-codec-1.3.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>face4j</artifactId>
 			<version>1.5.11</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/facebook/commons-httpclient-3.1.jar</systemPath>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/commons-httpclient-3.1.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>face4j</artifactId>
 			<version>1.5.11</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/facebook/commons-logging-1.1.1.jar</systemPath>
-		</dependency>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/commons-logging-1.1.1.jar</systemPath>
+		</dependency> 
 		<dependency>
 			<groupId>gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>1.5</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/facebook/gson-1.5.jar</systemPath>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gson-1.5.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.restfb</groupId>
