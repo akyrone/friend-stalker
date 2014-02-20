@@ -8,5 +8,8 @@
     	<class>com.itomkinas.friendStalker.domain.entity.Stalking</class>
     	<class>com.itomkinas.friendStalker.domain.entity.Connection</class>
     	<class>com.itomkinas.friendStalker.domain.entity.OnlinePresence</class>
+    	<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+      	</properties>
     </persistence-unit>
 </persistence>
