@@ -8,8 +8,8 @@
 			<column name="userId" autoIncrement="true" type="BIGINT(15)">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			<column name="full_name" type="VARCHAR(30)"></column>
-			<column name="uid" type="VARCHAR(60)"></column>
+			<column name="full_name" type="VARCHAR(255)"></column>
+			<column name="uid" type="VARCHAR(255)"></column>
 			<column name="tokken" type="VARCHAR(255)"></column>
 			<column name="token_valid_till" type="TIMESTAMP"
 				defaultValueDate="null">

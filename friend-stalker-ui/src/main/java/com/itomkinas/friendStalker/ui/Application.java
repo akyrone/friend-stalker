@@ -3,6 +3,7 @@ package com.itomkinas.friendStalker.ui;
 import org.apache.wicket.Page;
 import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.http.request.WebClientInfo;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
@@ -30,6 +31,7 @@ public class Application extends WebApplication {
         super.init();
         
         mountPage("/login", LoginPage.class);
+        getRequestCycleSettings().setGatherExtendedBrowserInfo(true);
         
         getRequestCycleSettings().setResponseRequestEncoding("UTF-8");
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");

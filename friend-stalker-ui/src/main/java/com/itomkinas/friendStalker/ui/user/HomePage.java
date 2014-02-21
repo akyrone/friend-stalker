@@ -11,7 +11,9 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import com.itomkinas.friendStalker.domain.entity.OnlinePresence;
 import com.itomkinas.friendStalker.domain.entity.UserEntity;
+import com.itomkinas.friendStalker.domain.service.OnlinePresenceService;
 import com.itomkinas.friendStalker.domain.service.UserService;
 import com.itomkinas.friendStalker.ui.template.BasePage;
 import com.itomkinas.friendStalker.ui.utils.FriendStalkerSession;
@@ -24,15 +26,20 @@ public class HomePage extends BasePage {
 	@SpringBean
 	UserService userService;
 	
+	@SpringBean
+	OnlinePresenceService onlinePresenceService;
+	
 	private UserEntity loggedInUser;
 	
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
 		
-		
-		add(initLabel("name", FriendStalkerSession.get().getUser().getFullName()));
-		add(initFriendList(FriendStalkerSession.get().getUser()));
+		loggedInUser = userService.loadByUid(FriendStalkerSession.get().getUser().getUid());
+
+		add(initLabel("name", loggedInUser.getFullName()));
+		add(initFriendList(loggedInUser));
+		add(initFriendOnlinePresenceList("onlinePresenceList", loggedInUser.getVictims()));
 	}
 	
 	public Label initLabel(String wicketId, String value) {
@@ -42,7 +49,6 @@ public class HomePage extends BasePage {
 	@SuppressWarnings("rawtypes")
 	public ListView initFriendList(UserEntity userEntity) {
 
-		loggedInUser = userService.loadByUid(FriendStalkerSession.get().getUser().getUid());
 		List<UserEntity> friendList = new ArrayList<UserEntity>(loggedInUser.getFriends());
 		
 		@SuppressWarnings("unchecked")
@@ -78,6 +84,22 @@ public class HomePage extends BasePage {
 		};
 		button.setVisible(!loggedInUser.getVictims().contains(friend));
 		return button;
+	}
+	
+	public ListView<UserEntity> initFriendOnlinePresenceList(String wicketId, List<UserEntity> list) {
+		ListView<UserEntity> listView = new ListView<UserEntity>(wicketId, list) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void populateItem(ListItem<UserEntity> item) {
+				List<OnlinePresence> presenceList = onlinePresenceService.getByUser(item.getModelObject());
+				item.add(new Label("name", item.getModelObject().getFullName()));
+				item.add(new OnlinePresenceTablePanel("panel", presenceList));
+			}
+		};
+		
+		return listView;
 	}
 	
 	public Long parseLong(String number) {
