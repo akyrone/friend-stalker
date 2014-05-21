@@ -74,15 +74,27 @@ public class OnlinePresenceTablePanel extends Panel {
     	List<OnlinePresenceTimeSpan> convertedList = new ArrayList<>(); 
     	OnlinePresenceTimeSpan timeSpan = null;
     	
+    	Date lastSpan = null;
+    	
     	for (OnlinePresence currentElement: list) {
+    		
     		if (timeSpan == null) {
     			timeSpan = newTimeSpan(currentElement.getTime(), currentElement.getOnlineStatus());
     		}
+    		
+    		if (isMoreThanTwoMinutes(lastSpan, currentElement.getTime())) {
+    			timeSpan.setStatus("UNDEFINED");
+    			timeSpan.setTo(currentElement.getTime());
+    			convertedList.add(timeSpan);
+    			timeSpan = newTimeSpan(currentElement.getTime(), currentElement.getOnlineStatus());
+			} else
+    		
     		if(!timeSpan.getStatus().equals(currentElement.getOnlineStatus())) {
     			timeSpan.setTo(currentElement.getTime());
     			convertedList.add(timeSpan);
     			timeSpan = newTimeSpan(currentElement.getTime(), currentElement.getOnlineStatus());
     		}
+    		lastSpan = currentElement.getTime();
     	}
     	
     	if (timeSpan != null) {
@@ -91,6 +103,16 @@ public class OnlinePresenceTablePanel extends Panel {
     	}
     	
     	return convertedList;
+    }
+    
+    public boolean isMoreThanTwoMinutes(Date from, Date to) {
+    	if (from == null) {
+    		return false;
+    	}
+    	
+    	long diff = to.getTime() - from.getTime();
+    	long diffSeconds = diff / 1000;
+    	return (diffSeconds > 120);
     }
     
     private OnlinePresenceTimeSpan newTimeSpan(Date from, String status) {
