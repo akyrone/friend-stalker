@@ -22,7 +22,7 @@ public class FacebookService {
 	@Autowired
 	OnlinePresenceService onlinePresenceService;
 	
-    @Scheduled(fixedRate=60000)
+    @Scheduled(fixedRate=25000)
     @Transactional
     public void trackOnlineStatus() {
     	List<UserEntity> userList = userService.loadAllActiveUsers();
