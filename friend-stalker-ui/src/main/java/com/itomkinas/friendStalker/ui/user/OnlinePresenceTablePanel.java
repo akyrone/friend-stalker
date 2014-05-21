@@ -40,13 +40,34 @@ public class OnlinePresenceTablePanel extends Panel {
 			protected void populateItem(ListItem<OnlinePresenceTimeSpan> item) {
 				DateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 				
-    	        item.add(new Label("from", dateFormatter.format(item.getModelObject().getFrom())));
-    	        item.add(new Label("to", dateFormatter.format(item.getModelObject().getTo())));
-    	        item.add(new Label("status", item.getModelObject().getStatus()));
-    	    }
+				OnlinePresenceTimeSpan timeSpan = item.getModelObject();
+				
+				
+    	        item.add(new Label("from", dateFormatter.format(timeSpan.getFrom())));
+    	        item.add(new Label("to", dateFormatter.format(timeSpan.getTo())));
+    	        item.add(new Label("status", timeSpan.getStatus()));
+    	        item.add(new Label("duration", getDuration(timeSpan.getFrom(), timeSpan.getTo())));
+			}
     	};
     	
     	return listView;
+    }
+    
+    public String getDuration(Date from, Date to) {
+    	long diff = to.getTime() - from.getTime();
+        long diffSeconds = diff / 1000 % 60;
+        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffHours = diff / (60 * 60 * 1000);
+        
+        return diffHours + ":" + twoDigits(diffMinutes) + ":" + twoDigits(diffSeconds);
+    }
+    
+    public String twoDigits(Long num) {
+    	String number = num + "";
+    	while (number.length() < 2) {
+    		number = "0" + number;
+    	}
+    	return number;
     }
     
     public List<OnlinePresenceTimeSpan> convert(List<OnlinePresence> list) {

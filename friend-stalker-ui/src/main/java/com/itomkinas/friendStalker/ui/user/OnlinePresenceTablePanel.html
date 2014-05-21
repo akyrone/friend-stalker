@@ -1,13 +1,17 @@
 <wicket:panel xmlns:wicket="http://wicket.apache.org">
-	<table class="table table-hover">
+	<table class="table table-bordered">
+	<thead>
 		<tr>
 			<th>From</th>
 			<th>To</th>
+			<th>Duration</th>
 			<th>Status</th>
 		</tr>
+	</thead>
 		<tr wicket:id="listview">
 			<td wicket:id="from"></td>
 			<td wicket:id="to"></td>
+			<td wicket:id="duration"></td>
 			<td wicket:id="status"></td>
 		</tr>
 	</table>
