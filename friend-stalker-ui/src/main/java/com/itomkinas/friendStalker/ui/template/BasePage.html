@@ -184,25 +184,7 @@
 
 		<!-- Left panel : Navigation area -->
 		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
-		<aside id="left-panel">
-
-			<!-- User info -->
-			<div class="login-info">
-				<span> <!-- User image size is adjusted inside CSS, it should stay as it --> <img src="img/avatars/sunny.png" alt="me" class="online" /> <a id="show-shortcut">john.doe <i class="fa fa-angle-down"></i></a> </span>
-			</div>
-			<!-- end user info -->
-
-			<!-- NAVIGATION : This navigation is also responsive
-
-			To make this navigation dynamic please make sure to link the node
-			(the reference to the nav > ul) after page load. Or the navigation
-			will not initialize.
-			-->
-			<nav>
-			</nav>
-			<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>
-
-		</aside>
+		<div wicket:id="leftPanel"></div>
 		<!-- END NAVIGATION -->
 
 		<!-- MAIN PANEL -->

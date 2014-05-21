@@ -15,6 +15,7 @@ public class BasePage extends WebPage {
 		super.onInitialize();
 		authenticate();
 		add(initLogoutLink("logout"));
+		add(new LeftPanel("leftPanel"));
 	}
 	
 	private void authenticate() {
