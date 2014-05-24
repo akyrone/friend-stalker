@@ -1,5 +1,6 @@
 package com.itomkinas.friendStalker.jpa;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -27,6 +28,17 @@ public class OnlinePresenceDaoJpa implements OnlinePresenceDao {
 	public List<OnlinePresence> getByUser(UserEntity user) {
 		TypedQuery<OnlinePresence> query = em.createQuery("Select c FROM OnlinePresence c WHERE c.user = :user", OnlinePresence.class);
 		query.setParameter("user", user);
+		return query.getResultList();
+	}
+	
+	@Override
+	public List<OnlinePresence> getByUser(UserEntity user, int hours) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.HOUR_OF_DAY, hours * -1);
+		
+		TypedQuery<OnlinePresence> query = em.createQuery("Select c FROM OnlinePresence c WHERE c.user = :user and c.time > :after", OnlinePresence.class);
+		query.setParameter("user", user);
+		query.setParameter("after", cal.getTime());
 		return query.getResultList();
 	}
 }

@@ -25,4 +25,9 @@ public class OnlinePresenceService {
 	public List<OnlinePresence> getByUser(UserEntity user) {
 		return onlinePresenceDao.getByUser(user);
 	}
+	
+	@Transactional
+	public List<OnlinePresence> getByUser(UserEntity user, int hours) {
+		return onlinePresenceDao.getByUser(user, hours);
+	}
 }

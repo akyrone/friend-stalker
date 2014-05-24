@@ -9,4 +9,5 @@ public interface OnlinePresenceDao {
 
 	OnlinePresence merge(OnlinePresence user);
 	List<OnlinePresence> getByUser(UserEntity user);
+	List<OnlinePresence> getByUser(UserEntity user, int hours);
 }

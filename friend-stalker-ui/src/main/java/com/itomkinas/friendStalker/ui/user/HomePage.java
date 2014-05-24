@@ -90,7 +90,7 @@ public class HomePage extends BasePage {
 
 			@Override
 			protected void populateItem(ListItem<UserEntity> item) {
-				List<OnlinePresence> presenceList = onlinePresenceService.getByUser(item.getModelObject());
+				List<OnlinePresence> presenceList = onlinePresenceService.getByUser(item.getModelObject(), 24);
 				item.add(new Label("name", item.getModelObject().getFullName()));
 				item.add(new OnlinePresenceTablePanel("panel", presenceList));
 			}
