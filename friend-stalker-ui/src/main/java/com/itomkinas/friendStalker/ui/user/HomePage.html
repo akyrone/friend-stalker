@@ -1,6 +1,13 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
 	<body class="container" xmlns:wicket="http://wicket.apache.org">
 		<div class="row">
+			<div class="col-md-8">
+				<h1>Last 24 hours activity</h1>
+				<div wicket:id="onlinePresenceList">
+					<h1 wicket:id="name"></h1>
+					<div wicket:id="panel"></div>
+				</div>
+			</div>
 			<div class="col-md-4">
 				<table class="table table-condensed">
 					<tr>
@@ -16,13 +23,6 @@
 						<td><a wicket:id="stalkButton" class="btn btn-primary btn-sm">Stalk</a></td>
 					</tr>
 				</table>
-			</div>
-			<div class="col-md-8">
-				<h1>Last 24 hours activity</h1>
-				<div wicket:id="onlinePresenceList">
-					<h1 wicket:id="name"></h1>
-					<div wicket:id="panel"></div>
-				</div>
 			</div>
 		</div>
 	</body>
