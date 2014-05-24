@@ -30,6 +30,32 @@ h1 {
 }
 
 ::selection {
-background: #3498db;
-color: #fff;
+  background: #3498db;
+  color: #fff;
 }
+
+.presence-offline {
+  color: #c0392b;
+}
+
+.presence-idle {
+  color: #f1c40f;
+}
+
+.presence-active {
+  color: #27ae60;
+}
+
+.presence-UNDEFINED {
+  color: #34495e;
+}
+
+table {
+ font-family: "Cabin";
+ line-height: 1.8em;
+ letter-spacing: 0px;
+ font-weight: 400;
+ font-style: normal;
+}
+
+

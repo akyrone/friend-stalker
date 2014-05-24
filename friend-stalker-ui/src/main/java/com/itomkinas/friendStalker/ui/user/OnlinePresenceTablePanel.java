@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.util.ListModel;
 
 import com.itomkinas.friendStalker.domain.entity.OnlinePresence;
@@ -45,7 +47,9 @@ public class OnlinePresenceTablePanel extends Panel {
 				
     	        item.add(new Label("from", dateFormatter.format(timeSpan.getFrom())));
     	        item.add(new Label("to", dateFormatter.format(timeSpan.getTo())));
-    	        item.add(new Label("status", timeSpan.getStatus()));
+    	        Label status = new Label("status", timeSpan.getStatus());
+    	        status.add(new AttributeAppender("class", new Model<String>("presence-" + timeSpan.getStatus()), " "));
+    	        item.add(status);
     	        item.add(new Label("duration", getDuration(timeSpan.getFrom(), timeSpan.getTo())));
 			}
     	};
@@ -83,7 +87,7 @@ public class OnlinePresenceTablePanel extends Panel {
     		}
     		
     		if (isMoreThanTwoMinutes(lastSpan, currentElement.getTime())) {
-    			timeSpan.setStatus("UNDEFINED");
+    			timeSpan.setStatus("undefined");
     			timeSpan.setTo(currentElement.getTime());
     			convertedList.add(timeSpan);
     			timeSpan = newTimeSpan(currentElement.getTime(), currentElement.getOnlineStatus());
