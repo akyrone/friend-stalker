@@ -34,10 +34,7 @@ public class HomePage extends BasePage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		
 		loggedInUser = userService.loadByUid(FriendStalkerSession.get().getUser().getUid());
-
-		add(initLabel("name", loggedInUser.getFullName()));
 		add(initFriendList(loggedInUser));
 		add(initFriendOnlinePresenceList("onlinePresenceList", loggedInUser.getVictims()));
 	}

@@ -14,8 +14,8 @@ public class BasePage extends WebPage {
 	protected void onInitialize() {
 		super.onInitialize();
 		authenticate();
-		add(initLogoutLink("logout"));
 		add(new LeftPanel("leftPanel"));
+		add(new TopPanel("topPanel"));
 	}
 	
 	private void authenticate() {
@@ -26,17 +26,5 @@ public class BasePage extends WebPage {
 
 	protected boolean isLoggedIn() {
 		return (FriendStalkerSession.get().isAuthenticated());
-	}
-	
-	private Link<Object> initLogoutLink(String wicketId) {
-		return new Link<Object>(wicketId) {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void onClick() {
-				FriendStalkerSession.get().setUser(null);
-				setResponsePage(LoginPage.class);
-			}
-		};
 	}
 }
